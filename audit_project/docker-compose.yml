@@ -1,0 +1,10 @@
+services:
+  audit-app:
+    build: .
+    container_name: audit_system_app
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./audit_system.db:/app/audit_system.db
+    restart: always
+

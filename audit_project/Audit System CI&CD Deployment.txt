@@ -1,0 +1,98 @@
+AuditLens AI Core
+
+Nama ini memberikan kesan sistem audit modern yang berbasis kecerdasan buatan, presisi, serta terpercaya bagi direksi dan komite audit, dan Menggambarkan "lensa" analitis yang tajam untuk membedah data laporan keuangan, pencocokan 3-Way Matching, hingga perhitungan kerugian piutang PSAK 71 secara transparan.
+
+Nama AuditLens AI Core sangat relevan dan memiliki positioning yang kuat untuk platform ini.
+
+Alasan Mengapa Nama "AuditLens AI Core" Sangat Tepat:
+AuditLens: Menggambarkan kemampuan "lensa" analitis yang tajam dalam membedah data keuangan hingga transaksi terkecil, memberikan transparansi dan ketajaman inspeksi.
+
+AI: Menegaskan integrasi kecerdasan buatan (Gemini LLM) yang mampu mengubah data mentah menjadi analisis 5C (Condition, Criteria, Cause, Effect, Recommendation) secara otomatis.
+
+Core: Menunjukkan bahwa sistem ini adalah fondasi utama (engine central) yang menggerakkan seluruh proses verifikasi 3-Way Matching, pengujian PSAK 71, hingga penerbitan laporan eksekutif.
+
+System Architecture Overview
+
++-----------------------------------------------------------------------------------+
+|                                  DATA INGESTION                                   |
+|   +---------------------------------------+   +-------------------------------+   |
+|   | Multimodal Parser (PDF, DOCX, OCR/IMG)|   | Spreadsheet & API Connectors  |   |
+|   +---------------------------------------+   +-------------------------------+   |
++-----------------------------------------|-----------------------------------------+
+                                          v
++-----------------------------------------------------------------------------------+
+|                           PYTHON STREAMLIT CORE ENGINE                            |
+|  +---------------------------+ +----------------------------+ +-----------------+ |
+|  | Auth & RBAC (Auditor/Dir) | | LLM 5C Extractor (Gemini)  | | Onboarding Tour | |
+|  +---------------------------+ +----------------------------+ +-----------------+ |
+|  +------------------------------------------------------------------------------+ |
+|  | Automated Audit Rules (3-Way Matching, Anomaly Journal, PSAK 71 AR Aging)    | |
+|  +------------------------------------------------------------------------------+ |
+|  +------------------------------------------------------------------------------+ |
+|  | Storage Layer: SQLite Database (schema.sql)                                  | |
+|  +------------------------------------------------------------------------------+ |
++-----------------------------------------|-----------------------------------------+
+                                          v
++-----------------------------------------------------------------------------------+
+|                            PRESENTATION & DELIVERABLES                            |
+|  +-------------------------+ +------------------------+ +-----------------------+ |
+|  | Executive Dashboard     | | Multi-Format Exporters | | Real-time Alerting    | |
+|  | - Plotly Sankey Flow    | | - Excel V2 (Native)    | | - SMTP Email Sender   | |
+|  | - Interactive Metrics   | | - PDF Mgt Letter       | | - n8n WhatsApp        | |
+|  |                         | | - PPTX Presentation    | |   Webhook             | |
+|  +-------------------------+ +------------------------+ +-----------------------+ |
++-----------------------------------------------------------------------------------+
+
+Spesifikasi Fitur Utama MVP v2.0
+
+Kode,Nama Modul,Deskripsi Functional & Technical
+M1,Multi-Format Ingestion,"Mendukung pembacaan Excel, CSV, PDF Tables (pdfplumber), Word (python-docx), dan Gambar Scan OCR (pytesseract)."
+M2,AI 5C Extractor,Menggunakan Gemini 2.5 Flash via google-genai SDK untuk mengubah catatan audit menjadi JSON 5C terstruktur.
+M3,Audit Rule & PSAK 71 Engine,"Deteksi 3-Way Matching Mismatch, anomali jam posting jurnal, evaluasi Expected Credit Loss (CKPN) piutang usaha."
+M4,RBAC & Security,Autentikasi pengguna berbasis peran (Auditor vs Director) menggunakan hashing SHA-256.
+M5,Executive Presentation,"Menampilkan Sankey Diagram alur dana PO-RR-Invoice, donut chart tingkat risiko, serta mengekspor slide .pptx."
+M6,Excel Exporter V2,Menghasilkan berkas Excel 2-sheet (Matriks Action Plan + Detail Mismatch) dengan grafik donut native XlsxWriter.
+M7,Alerting & Integration,Mengirim laporan via email SMTP TLS dan mendistribusikan notifikasi High Risk ke WhatsApp via webhook n8n/Fonnte.
+
+Updated Storyboard & User Journey v2.0
+
+[ Step 1: Login & Role Selection ]       [ Step 2: Interactive Onboarding ]
++--------------------------------+       +--------------------------------+
+| Select Auditor or Director     | ----> | Guided 5-Step Tour Overlay     |
+| Role Authorization             |       | (Option to Skip anytime)       |
++--------------------------------+       +--------------------------------+
+                                                         |
+                                                         v
+[ Step 4: Rule Engine Execution ]        [ Step 3: Multimodal Data Ingest ]
++--------------------------------+       +--------------------------------+
+| Run 3-Way Matching & PSAK 71   | <---- | Upload PDF, OCR Image, Excel,   |
+| AI 5C Gemini Extraction        |       | or Raw Field Notes             |
++--------------------------------+       +--------------------------------+
+               |
+               v
+[ Step 5: Workbench & Management ]       [ Step 6: Multi-Channel Export ]
++--------------------------------+       +--------------------------------+
+| Review Findings, Assign Risk,  | ----> | Download PDF, PPTX, Excel V2   |
+| Save to SQLite Database        |       | Send SMTP Email & n8n WA Alert |
++--------------------------------+       +--------------------------------+
+
+Struktur Berkas Project (Modular Architecture)
+Seluruh sistem dipecah menjadi berkas independen berikut:
+
+audit_project/
+├── app.py                      # Berkas utama aplikasi Streamlit
+├── onboarding_module.py        # Modul wizard panduan interaktif
+├── auth_module.py              # Modul autentikasi & RBAC
+├── audit_engine.py             # Engine 3-Way Matching & Anomali
+├── psak71_engine.py            # Engine AR Aging & CKPN PSAK 71
+├── llm_5c_extractor.py         # Engine Ekstraksi AI 5C (Gemini)
+├── sankey_module.py            # Modul Sankey Diagram Plotly
+├── excel_exporter_v2.py        # Exporter Excel V2 (Native Donut & Sheet 2)
+├── report_generator.py         # Exporter PDF Management Letter
+├── pptx_generator.py           # Exporter PowerPoint Presentation
+├── n8n_notifier.py             # Modul Webhook Notifikasi WhatsApp
+├── schema.sql                  # Skema DDL Database SQLite
+├── requirements.txt            # Daftar dependensi Python
+├── Dockerfile                  # Containerization image build
+├── docker-compose.yml          # Container service orchestrator
+└── deploy.sh                   # Script deployment otomatis

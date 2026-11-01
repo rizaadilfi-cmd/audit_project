@@ -1,0 +1,16 @@
+streamlit
+pandas
+numpy
+plotly
+xlsxwriter
+openpyxl
+python-pptx
+reportlab
+google-genai
+anthropic
+python-dotenv
+requests
+pillow
+pytesseract
+pdfplumber
+python-docx
